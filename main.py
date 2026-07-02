@@ -1,18 +1,16 @@
-import spacy
+from modules.processor import TextProcessor
 
 
 def main():
-    print("Loading the model...")
-    nlp = spacy.load("en_core_web_sm")
-
     with open("data/sample.txt", "r", encoding="utf-8") as f:
         text = f.read()
 
-    doc = nlp(text)
+    processor = TextProcessor()
+    results = processor.analyze_text(text)
 
-    print("\n--- Analysis results ---")
-    for token in doc:
-        print(f"Word: {token.text:15} | POS: {token.pos_}")
+    print("--- Analysis results ---")
+    for item in results:
+        print(f"Word: {item['word']:15} | Pos: {item['pos']}")
 
 
 if __name__ == "__main__":
